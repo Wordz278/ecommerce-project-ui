@@ -1,0 +1,199 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="active"> Register New Administrator </h2>  
+
+      <!-- Administrator Form -->
+      <form
+        name="form"
+        #f="ngForm"
+        novalidate>
+
+
+        <div class="form-group">
+          <input 
+            type="text" 
+            class="form-control fadeIn second" 
+            name="firstName"
+            #firstName="ngModel" 
+            [(ngModel)]="form.firstName"
+            placeholder="Enter First Name......"
+            required
+            >
+            <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="firstName.touched && firstName.invalid">
+              <div *ngIf="firstName.errors.required">
+                First Name is required
+              </div>
+          </div>
+        </div>
+  
+  
+        <div class="form-group">
+          <input 
+            type="text" 
+            class="form-control fadeIn second" 
+            name="lastName"
+            #lastName="ngModel" 
+            [(ngModel)]="form.lastName"
+            placeholder="Enter Last Name......"
+            required
+            >
+            <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="lastName.touched && lastName.invalid">
+              <div *ngIf="lastName.errors.required">
+                Last Name is required
+              </div>
+          </div>
+        </div>
+ 
+  
+        <div class="form-group">
+          <input 
+            type="text" 
+            class="form-control fadeIn second" 
+            name="phone"
+            #phone="ngModel" 
+            [(ngModel)]="form.phone"
+            placeholder="Enter Phone Number......"
+            maxlength="10"
+            required
+            >
+            <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="phone.touched && phone.invalid">
+              <div *ngIf="phone.errors.required">
+                Phone Number is required
+              </div>
+              <div *ngIf="phone.errors.maxlength">
+                Phone Number length is 10 digits
+              </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input 
+            type="email" 
+            class="form-control fadeIn second" 
+            name="email"
+            #email="ngModel" 
+            [(ngModel)]="form.email"
+            placeholder="Enter Email......"
+            required
+            email
+            >
+            <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="email.touched && email.invalid">
+              <div *ngIf="email.errors.required">Email is required</div>
+              <div *ngIf="email.errors.email">
+                Please enter a valid email address
+              </div>       
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <input 
+            type="text" 
+            class="form-control fadeIn second" 
+            name="address"
+            #address="ngModel" 
+            [(ngModel)]="form.address"
+            placeholder="Enter Your Address......"
+            maxlength="100"
+            required
+            >
+            <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="address.touched && address.invalid">
+              <div *ngIf="address.errors.required">Address is required</div>
+              <div *ngIf="address.errors.maxlength">Address maximum length is 100 characters</div>     
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <input 
+            type="text" 
+            class="form-control fadeIn second" 
+            name="city"
+            #city="ngModel" 
+            [(ngModel)]="form.city"
+            placeholder="Enter Your City......"
+            minlength="3"
+            maxlength="100"
+            required
+            >
+            <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="city.touched && city.invalid">
+              <div *ngIf="city.errors.required">City is required</div>
+              <div *ngIf="city.errors.minlength">City minimum length is 3 characters</div>
+              <div *ngIf="city.errors.maxlength">City maximum length is 100 characters</div>       
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <input 
+            type="text" 
+            class="form-control fadeIn second" 
+            name="postalCode"
+            #postalCode="ngModel" 
+            [(ngModel)]="form.postalCode"
+            placeholder="Enter Your Post Code......"
+            [min]="2"
+            required
+            >
+            <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="postalCode.touched && postalCode.invalid">
+              <div *ngIf="postalCode.errors.required">Postal Code is required</div>
+              <div *ngIf="postalCode.errors.min">Postal Code minimum length is 2 characters</div>       
+          </div>
+        </div>
+
+        <div class="form-group">
+            <select
+                id="role" 
+                name="role" 
+                class="form-control fadeIn second"
+                #role="ngModel"
+                [(ngModel)]="form.role"
+                required>
+                <option>---------------------------</option>
+                <option
+                    *ngFor="let role of roles" 
+                    [value]="role.id">
+                    {{role.name}}
+                </option>
+            </select>
+            <div
+            class="alert alert-danger"
+            *ngIf="role.touched && role.invalid">
+              <div *ngIf="role.errors.required">Role Selection is required</div>
+            </div>
+          </div>
+        
+        <p>{{f.value | json}}</p>
+        <div class="form-group">
+          <button id="button" [disabled]="!f.valid" class="form-group fadeIn fourth">Save</button>
+        </div>
+        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+          Signup failed!<br />{{ errorMessage }}
+        </div>
+      </form>
+      <div class="alert alert-success" *ngIf="isSuccessful">
+        <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+        Admin Registered Succesfully
+      </div>
+  
+    </div>
+  </div>

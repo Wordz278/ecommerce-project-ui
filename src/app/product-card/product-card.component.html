@@ -1,0 +1,13 @@
+<div class="card" style="width: 15rem;">
+    <img class="card-img-top" [src]="product.imageUrl" alt="{{product.name}}">
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">{{product.description}}</p>
+      <p class="card-text">{{product.price | currency:'ZAR':'R'}}</p>
+    </div>
+    <div class="card-footer">
+      <a [queryParams]="{ image : product.id}" routerLink="/admin/product" class="btn btn-primary btn-block">Add | Edit Image</a>
+      <a href="#" class="btn btn-primary btn-block">Edit Product</a>
+      <a *ngIf="showAdminBoard || showSuperBoard" (click)="onDeleteProduct(product?.id)" class="btn btn-primary btn-block">Delete Product</a>
+    </div>
+</div>

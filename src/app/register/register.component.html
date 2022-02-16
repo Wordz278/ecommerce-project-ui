@@ -1,0 +1,229 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Sign Up </h2>
+    <h2 class="inactive underlineHover" routerLink="/login">Sign In </h2>
+
+    <!-- Register Form -->
+    <form
+      *ngIf="!isSuccessful"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate>
+      <div class="form-group">
+        <input 
+          type="text" 
+          class="form-control fadeIn second" 
+          name="username"
+          #username="ngModel" 
+          [(ngModel)]="form.username"
+          placeholder="Enter Username......"
+          minlength="3"
+          maxlength="20"
+          required
+          >
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && username.invalid">
+            <div *ngIf="username.errors.required">
+              Username is required</div>
+            <div *ngIf="username.errors.minlength">
+              Username must be at least 3 characters
+            </div>
+            <div *ngIf="username.errors.maxlength">
+              Username must be at most 20 characters
+            </div>        
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input 
+          type="password" 
+          class="form-control fadeIn second" 
+          name="password"
+          #password="ngModel" 
+          [(ngModel)]="form.password"
+          placeholder="Enter Password......"
+          minlength="6"
+          required
+          >
+          <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">
+              Password must be at least 6 characters
+            </div>
+          </div>
+      </div>
+      
+      <div class="form-group">
+        <input 
+          type="text" 
+          class="form-control fadeIn second" 
+          name="firstName"
+          #firstName="ngModel" 
+          [(ngModel)]="form.firstName"
+          placeholder="Enter First Name......"
+          required
+          >
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && firstName.invalid">
+            <div *ngIf="firstName.errors.required">
+              First Name is required
+            </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <input 
+          type="text" 
+          class="form-control fadeIn second" 
+          name="lastName"
+          #lastName="ngModel" 
+          [(ngModel)]="form.lastName"
+          placeholder="Enter Last Name......"
+          required
+          >
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && lastName.invalid">
+            <div *ngIf="lastName.errors.required">
+              Last Name is required
+            </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input 
+          type="text" 
+          class="form-control fadeIn second" 
+          name="phone"
+          #phone="ngModel" 
+          [(ngModel)]="form.phone"
+          placeholder="Enter Phone Number......"
+          maxlength="10"
+          required
+          >
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && phone.invalid">
+            <div *ngIf="phone.errors.required">
+              Phone Number is required
+            </div>
+            <div *ngIf="phone.errors.maxlength">
+              Phone Number length is 10 integers
+            </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input 
+          type="email" 
+          class="form-control fadeIn second" 
+          name="email"
+          #email="ngModel" 
+          [(ngModel)]="form.email"
+          placeholder="Enter Email......"
+          minlength="3"
+          maxlength="20"
+          required
+          >
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && email.invalid">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">
+              Email must be a valid email address
+            </div>       
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <input 
+          type="text" 
+          class="form-control fadeIn second" 
+          name="address"
+          #address="ngModel" 
+          [(ngModel)]="form.address"
+          placeholder="Enter Your Address......"
+          minlength="3"
+          maxlength="100"
+          required
+          >
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && address.invalid">
+            <div *ngIf="address.errors.required">Address is required</div>
+            <div *ngIf="address.errors.minlength">
+              Address minimum length is 3 characters
+            </div>       
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input 
+          type="text" 
+          class="form-control fadeIn second" 
+          name="city"
+          #city="ngModel" 
+          [(ngModel)]="form.city"
+          placeholder="Enter Your City......"
+          minlength="3"
+          maxlength="100"
+          required
+          >
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && city.invalid">
+            <div *ngIf="city.errors.required">City is required</div>
+            <div *ngIf="city.errors.minlength">
+              City minimum length is 3 characters
+            </div>       
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input 
+          type="text" 
+          class="form-control fadeIn second" 
+          name="postalCode"
+          #postalCode="ngModel" 
+          [(ngModel)]="form.postalCode"
+          placeholder="Enter Your Post Code......"
+          minlength="2"
+          maxlength="100"
+          required
+          >
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && postalCode.invalid">
+            <div *ngIf="postalCode.errors.required">Postal Code is required</div>
+            <div *ngIf="postalCode.errors.minlength">
+              Postal Code minimum length is 2 characters
+            </div>       
+        </div>
+      </div>
+      <div class="form-group">
+        <button [disabled]="!f.valid" id="button" class="form-group fadeIn fourth">Sign Up</button>
+      </div>
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+        Signup failed!<br />{{ errorMessage }}
+      </div>
+    </form>
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+      Your registration is successful!
+    </div>
+
+  </div>
+</div>

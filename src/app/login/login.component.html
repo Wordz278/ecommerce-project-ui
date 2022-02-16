@@ -1,0 +1,74 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active" *ngIf="!isLoggedIn"> Sign In </h2>
+    <h2 class="inactive underlineHover" *ngIf="!isLoggedIn" routerLink="/register">Sign Up </h2>
+
+    <!-- Login Form -->
+    <form
+      *ngIf="!isLoggedIn"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate>
+      <div class="form-group">
+        <input 
+          type="text" 
+          class="form-control fadeIn second" 
+          name="username" 
+          [(ngModel)]="form.username"
+          placeholder="Enter Username......"
+          #username="ngModel"
+          required
+          >
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && username.invalid">
+          Username is required!
+        </div>
+      </div>
+      <div class="form-group">
+        <input 
+          type="password" 
+          class="form-control fadeIn third" 
+          name="password" 
+          [(ngModel)]="form.password"
+          minlength="6"
+          placeholder="Enter password.........."
+          #password="ngModel"
+          required
+          >
+          <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">
+              Password must be at least 6 characters
+            </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button id="button" class="form-group fadeIn fourth">Login</button>
+      </div>
+        <div class="form-group">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && isLoginFailed">
+          <button class="close" aria-label="close" data-dismiss="alert">&times;</button>
+          Login failed
+        </div>
+      </div>
+    </form>
+      <!-- <div class="alert alert-success" *ngIf="isLoggedIn">
+        Logged in as {{ roles }}.
+      </div> -->
+    <!-- Remind Passowrd -->
+    <!-- <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div> -->
+
+  </div>
+</div>

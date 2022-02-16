@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="container" style="padding : 10px">
+      <!--Product Form-->
+      <form
+        #addProductForm="ngForm" 
+        name="form" 
+        (ngSubmit)="onSaveProduct()" 
+        novalidate>
+
+        <div class="form-group">
+          <label for="Name">Name</label>
+          <input [(ngModel)]="form.name" #name="ngModel" name="name" id="name" type="text" class="form-control" required/>
+          <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
+            Name is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input [(ngModel)]="form.description" #description="ngModel" name="description" id="description " type="text" class="form-control" required/>
+          <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
+            Description is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <div class="input-group">
+            <span class="input-group-text">R</span>
+            <input [(ngModel)]="form.price" #price="ngModel" [min]="0" name="price" id="price" type="number" class="form-control" required/>
+          </div>
+          <div *ngIf="price.touched && price.invalid" class="alert alert-danger">
+            <div *ngIf="price.errors.required">Price is required.</div>
+            <div *ngIf="price.errors.min">Price should be 0 or higher.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select [(ngModel)]="form.category" #category="ngModel" name="category" id="category" class="form-control" required>
+            <option value="">------------------</option>
+            <option *ngFor="let c of categories" [value]="c?.name">
+              {{c.name}}
+            </option>
+          </select>
+          <div *ngIf="category.touched && category.invalid" class="alert alert-danger">
+            Category is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-group">
+            <label for="imageUrl">Image</label>
+            <input [(ngModel)]="form.imageUrl" class="form-control" #imageUrl="ngModel" type="file" name="imageUrl" accept="image/*" (change)="handleFileInput($any($event).target.files)" required/>
+          </div>
+          <div *ngIf="imageUrl.touched && imageUrl.invalid" class="alert alert-danger">
+            <div *ngIf="imageUrl.errors.required">Image is Required</div>
+          </div>
+        </div>
+        
+        <p>{{addProductForm.value | json}}</p>
+        
+        <button [disabled]="!addProductForm.valid" class="btn btn-primary">Save Product</button>
+      </form>
+      <div class="alert alert-success" data-auto-dismiss role="alert" *ngIf="isSaved">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{name.value}} Product Saved Succesfully
+      </div>
+    </div>
+  </div>
+  
+  <!-- <div class="col-mid-9" style="padding: 10px;">
+    <form enctype="multipart/form-data" #addImageProductForm="ngForm" name="addImageProductForm" novalidate>
+      <div class="col-md-3" style="padding : 10px">
+        <div class="form-group">
+          <label for="imageUrl">Image</label>
+          <input [(ngModel)]="form.imageUrl" class="form-control" #imageUrl="ngModel" type="file" name="imageUrl" accept="image/png, image/jpg" required/>
+        </div>
+      </div>
+      <div *ngIf="imageUrl.touched && imageUrl.invalid" class="alert alert-danger">
+        <div *ngIf="imageUrl.errors.required">Image is Required</div>
+      </div>
+        <button [disabled]="!addImageProductForm.valid" class="btn btn-primary">Upload</button>
+    </form>
+  </div> -->
+
+
+  <div style="padding : 10px">
+    <div class="card" style="width: 30rem;">
+      <div class="card-body">
+        <img class="card-img-top"  [src]="defaultImagePath" style="width: 250px;height:200px">
+        <h5 class="card-title">{{name.value}}</h5>
+        <p class="card-text">{{description.value}}</p>
+        <p class="card-text">{{category.value}}</p>
+        <p class="card-text">{{price.value | currency:'ZAR':'R'}}</p>
+      </div>
+    </div>
+  </div>
+
+</div>
